@@ -1,0 +1,9 @@
+.row
+  .col-md-4
+    - @projects.each do |p|
+      .row
+        .col-md-12
+          = p.title
+    = form_with url: projects_path do
+      = text_field_tag :title
+      = submit_tag 'Save'
