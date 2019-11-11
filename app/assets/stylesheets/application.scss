@@ -11,21 +11,33 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require bootstrap-datepicker
  *= require_self
  */
 @import "bootstrap";
-
+body {
+  background: #e7e8e9;
+}
 span.dropdown_menu {
   float: right;
 }
 #title {
   width: 100%;
 }
+#name {
+  width: 75%;
+}
 #add_project {
   cursor: pointer;
 }
-.project-list {
+#add_task {
+  cursor: pointer;
+}
+.project-list, .task-list {
   width: 100%;
+}
+.project-list {
+  margin-top: 20px;
 }
 
 .project:hover {
@@ -33,5 +45,32 @@ span.dropdown_menu {
     content: '\2807';
     font-size: 14px;
     cursor: pointer;
+  }
+}
+.square {
+  height: 15px;
+  width: 15px;
+  position: relative;
+  top: 5px;
+  border: 1px black solid;
+}
+#task_body {
+  background: white;
+  height: 90vh;
+}
+#tasks {
+  padding: 20px;
+}
+.head {
+  margin-bottom: 20px;
+  span{
+    font-size: 25px;
+    &.date {
+      color: grey;
+      font-size: 14px;
+      line-height: 24px;
+      font-weight: 600;
+      margin-top: -5px;
+    }
   }
 }

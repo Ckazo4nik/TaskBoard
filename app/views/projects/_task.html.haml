@@ -1,0 +1,12 @@
+- @tasks.each do |task|
+  .col-md-12.task{id: "task_#{task.id}"}
+    .row
+      .col-md-1
+        .square{style: "background: #{get_priority_color(task)}"}
+      .col-md-4
+        = task.name
+      .col-md-3
+        = task.to_do_until.strftime('%a, %e %b %Y')
+      .col-md-3.text-center
+        = task.project&.title
+  %hr

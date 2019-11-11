@@ -1,5 +1,5 @@
 .row
-  .col-md-3
+  .col-md-2
     .row#projects
       .project-list
         = render 'project', collection: @projects
@@ -8,6 +8,30 @@
     .form_create_project.d-none
       = form_with model: @project, id: 'new_project' do
         = text_field_tag :title
+        .buttons.col-md-12.text-center
+          = submit_tag 'Save', class: 'col-md-6'
+          = link_to 'Cancel', '', class: 'col-md-6'
+  .col-md-10#task_body
+    .row#tasks
+      .head
+        %span= "Сьогодні"
+        %span.date= Date.today.strftime('%a, %e %b %Y')
+      .task-list
+        - if @tasks&.any?
+          = render 'task', collection: @tasks
+        - else
+          .col-md-12
+            Ще не створено жодного таску
+      .col-md-12
+        #add_task Add Task
+    .form_create_task.d-none
+      = form_with model: Task.new, id: 'new_task' do
+        .input-group
+          = text_field_tag :name, '', class: 'form-control'
+          = text_field_tag :to_do_until, '', placeholder: 'date', class: 'datepicker form-control '
+        .select-buttons.text-right
+          = select_tag :project_id, options_from_collection_for_select(@projects, :id, :title)
+          = select_tag :priority, options_for_select(Task.priorities.collect{ |t| [t.first, t.first] })
         .buttons.col-md-12.text-center
           = submit_tag 'Save', class: 'col-md-6'
           = link_to 'Cancel', '', class: 'col-md-6'

@@ -16,6 +16,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require bootstrap-datepicker
 //= require_tree .
 
 
@@ -28,10 +29,25 @@ $(document).ready(function() {
   });
 
 });
+$(document).ready(function() {
+  $("#new_task").on("ajax:success", function(event) {
+    $(".task-list").html(event.detail[0].attachmentPartial);
+    $('.form_create_task').addClass('d-none')
+    $('#add_task').removeClass('d-none')
+    $(this).find('#name').val('')
+  });
+
+});
 
 $(document).on('click', '#add_project',function() {
     $(this).addClass('d-none');
     $('.form_create_project').removeClass('d-none')
+});
+
+
+$(document).on('click', '#add_task',function() {
+    $(this).addClass('d-none');
+    $('.form_create_task').removeClass('d-none')
 });
 
 $(document).on('click', '.dropdown-item',function() {
@@ -57,4 +73,10 @@ $(document).on('click', '.dropdown-item',function() {
       $(`#project_${params[2]}`).hide();
     });
   }
+});
+
+$(document).ready(function(){
+  $('.datepicker').datepicker({
+    format: "yyyy-mm-dd"
+  });
 });

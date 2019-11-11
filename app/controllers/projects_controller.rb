@@ -3,6 +3,8 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all.order('created_at ASC')
     @project = Project.new
+    @tasks = Task.all.order('priority DESC')
+    # @tasks = Task.where(project_id: params[:project_id] || @projects.first.id) if params[:project_id]
   end
 
   def create

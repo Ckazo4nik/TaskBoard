@@ -8,5 +8,9 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %nav.navbar.navbar-dark.bg-primary
+      .container
+        = link_to "TODO", root_path, class: 'navbar-brand'
+
     .container
       = yield
