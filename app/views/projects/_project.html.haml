@@ -1,0 +1,15 @@
+- @projects.each do |project|
+  .col-md-12.project{id: "project_#{project.id}"}
+    %span= project.title
+    %span.dropdown_menu.dropleft
+      #dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
+      .dropdown-menu
+        %span{class: 'dropdown-item', id: "edit_project_#{project.id}"} Edit
+        %span{ class: 'dropdown-item', id: "destroy_project_#{project.id}"} Delete
+  .col-md-12.project.d-none{id: "form_project_#{project.id}"}
+    = form_for project, url: projects_path, method: :patch, id: 'update_project_23' do
+      = text_field_tag :title, project.title
+      = hidden_field_tag :id, project.id
+      .buttons.col-md-12.text-center
+        = submit_tag 'Save', class: 'col-md-6', id: 'update_p'
+        = link_to 'Cancel', '', class: 'col-md-6'

@@ -14,3 +14,24 @@
  *= require_self
  */
 @import "bootstrap";
+
+span.dropdown_menu {
+  float: right;
+}
+#title {
+  width: 100%;
+}
+#add_project {
+  cursor: pointer;
+}
+.project-list {
+  width: 100%;
+}
+
+.project:hover {
+  #dropdown-toggle:after {
+    content: '\2807';
+    font-size: 14px;
+    cursor: pointer;
+  }
+}

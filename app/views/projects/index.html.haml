@@ -1,9 +1,13 @@
 .row
-  .col-md-4
-    - @projects.each do |p|
-      .row
-        .col-md-12
-          = p.title
-    = form_with url: projects_path do
-      = text_field_tag :title
-      = submit_tag 'Save'
+  .col-md-3
+    .row#projects
+      .project-list
+        = render 'project', collection: @projects
+      .col-md-12
+        #add_project Add Project
+    .form_create_project.d-none
+      = form_with model: @project, id: 'new_project' do
+        = text_field_tag :title
+        .buttons.col-md-12.text-center
+          = submit_tag 'Save', class: 'col-md-6'
+          = link_to 'Cancel', '', class: 'col-md-6'

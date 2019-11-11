@@ -17,3 +17,44 @@
 //= require popper
 //= require bootstrap
 //= require_tree .
+
+
+$(document).ready(function() {
+  $("#new_project").on("ajax:success", function(event) {
+    $(".project-list").html(event.detail[0].attachmentPartial);
+    $('.form_create_project').addClass('d-none')
+    $('#add_project').removeClass('d-none')
+    $(this).find('#title').val('')
+  });
+
+});
+
+$(document).on('click', '#add_project',function() {
+    $(this).addClass('d-none');
+    $('.form_create_project').removeClass('d-none')
+});
+
+$(document).on('click', '.dropdown-item',function() {
+  let params = this.id.split('_');
+  if(params[0] == 'edit'){
+    let activated = $('.active');
+    if(activated.length > 0) {
+      activated.each(function( index ) {
+        let params = this.id.split('_');
+        $(this).removeClass('d-none active');
+        $(`#form_project_${params[1]}`).addClass('d-none');
+      });
+    }
+    $(`#project_${params[2]}`).addClass('d-none active');
+    $(`#form_project_${params[2]}`).removeClass('d-none');
+  }else {
+    $.ajax({
+      url: "/projects",
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      type: "delete",
+      data: {id: params[2]},
+    }).done(function() {
+      $(`#project_${params[2]}`).hide();
+    });
+  }
+});
