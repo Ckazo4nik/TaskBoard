@@ -25,7 +25,7 @@ span.dropdown_menu {
   width: 100%;
 }
 #name {
-  width: 75%;
+  width: 50%;
 }
 #add_project {
   cursor: pointer;
@@ -41,6 +41,18 @@ span.dropdown_menu {
 }
 
 .project:hover {
+  #dropdown-toggle:after {
+    content: '\2807';
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+.task {
+  border-bottom: 1px #c3c3c3 solid;
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+.task:hover {
   #dropdown-toggle:after {
     content: '\2807';
     font-size: 14px;

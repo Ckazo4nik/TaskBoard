@@ -52,26 +52,60 @@ $(document).on('click', '#add_task',function() {
 
 $(document).on('click', '.dropdown-item',function() {
   let params = this.id.split('_');
-  if(params[0] == 'edit'){
-    let activated = $('.active');
-    if(activated.length > 0) {
-      activated.each(function( index ) {
-        let params = this.id.split('_');
-        $(this).removeClass('d-none active');
-        $(`#form_project_${params[1]}`).addClass('d-none');
+  if(params[1] == 'project') {
+
+    if(params[0] == 'edit'){
+      let activated = $('.active');
+      if(activated.length > 0) {
+        activated.each(function( index ) {
+          let params = this.id.split('_');
+          $(this).removeClass('d-none active');
+          $(`#form_project_${params[1]}`).addClass('d-none');
+        });
+      }
+      $(`#project_${params[2]}`).addClass('d-none active');
+      $(`#form_project_${params[2]}`).removeClass('d-none');
+    }else {
+      $.ajax({
+        url: `/projects/${params[2]}`,
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        type: "delete",
+        data: {},
+      }).done(function() {
+        $(`#project_${params[2]}`).hide();
       });
     }
-    $(`#project_${params[2]}`).addClass('d-none active');
-    $(`#form_project_${params[2]}`).removeClass('d-none');
   }else {
-    $.ajax({
-      url: "/projects",
-      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-      type: "delete",
-      data: {id: params[2]},
-    }).done(function() {
-      $(`#project_${params[2]}`).hide();
-    });
+    if(params[0] == 'edit'){
+      let activated = $('.active');
+      if(activated.length > 0) {
+        activated.each(function( index ) {
+          let params = this.id.split('_');
+          $(this).removeClass('d-none active');
+          $(`#form_task_${params[1]}`).addClass('d-none');
+        });
+      }
+      $(`#task_${params[2]}`).addClass('d-none active');
+      $(`#form_task_${params[2]}`).removeClass('d-none');
+    }else if (params[0] == 'delete') {
+      $.ajax({
+        url: `/tasks/${params[2]}`,
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        type: "delete",
+        data: {},
+      }).done(function() {
+        $(`#task_${params[2]}`).hide();
+      });
+    }else {
+      $.ajax({
+        url: `/tasks/${params[2]}/done`,
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        type: "post",
+        data: {},
+      }).done(function() {
+        $(`#task_${params[2]}`).hide();
+      });
+    }
   }
 });
 
