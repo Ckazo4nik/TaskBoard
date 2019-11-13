@@ -1,23 +1,31 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
+  before_action :load_project, only: %i[index]
+  before_action :find_project, only: %i[update destroy]
+
+  respond_to :html, only: %i[update create index]
+  respond_to :json, only: %i[destroy]
+
   def index
-    @projects = Project.all.order('created_at ASC')
     @tasks = filter_tasks
+    respond_with @tasks
   end
 
   def create
-    @project = Project.create(project_params)
-    @projects =  Project.all.order('created_at ASC')
+    @project  = Project.create(project_params)
+    @projects = Project.all.order('created_at ASC')
     if @project.save
       respond_to do |format|
         format.json do
-          render json:  {
-              attachmentPartial:
-                  render_to_string(
-                      partial: 'projects/project',
-                      formats: :html,
-                      layout: false,
-                      collections: @projects
-                  )
+          render json: {
+            attachmentPartial:
+                               render_to_string(
+                                 partial:     'projects/project',
+                                 formats:     :html,
+                                 layout:      false,
+                                 collections: @projects
+                               )
           }
         end
       end
@@ -27,17 +35,13 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
     @project.update!(project_params)
-    redirect_to root_path
+    respond_with @project, location: -> { root_path }
   end
 
   def destroy
-    @project = Project.find(params[:id])
-    @project.destroy!
-    render json: { status: :ok }
+    respond_with @project.destroy!
   end
-
 
   private
 
@@ -46,6 +50,16 @@ class ProjectsController < ApplicationController
   end
 
   def find_project
-    @project = Project.find_by_title(params[:title]) if params[:title]
+    @project = Project.find(params[:id])
+  end
+
+  def load_project
+    @projects = Project.all.order('created_at ASC')
+  end
+
+  def filter_tasks
+    Task.fresh
+      .filter_by_project(params[:project_id])
+      .filter_by_date_range(params[:date_range])
   end
 end

@@ -29,6 +29,7 @@ $(document).ready(function() {
   });
 
 });
+
 $(document).ready(function() {
   $("#new_task").on("ajax:success", function(event) {
     $(".task-list").html(event.detail[0].attachmentPartial);

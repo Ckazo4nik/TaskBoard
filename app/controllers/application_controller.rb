@@ -1,8 +1,7 @@
-class ApplicationController < ActionController::Base
+# frozen_string_literal: true
 
-  def filter_tasks
-    Task.fresh
-        .filter_by_project(params[:project_id])
-        .filter_by_date_range(params[:date_range])
-  end
+require 'application_responder'
+
+class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
 end

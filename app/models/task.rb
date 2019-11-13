@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Task < ApplicationRecord
+  belongs_to :project, optional: true
   validates :name, :to_do_until, presence: true
   validate :check_to_do_until_date
-  belongs_to :project, optional: true
   enum status: %i[fresh done]
   enum priority: %i[low middle high]
 

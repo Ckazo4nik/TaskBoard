@@ -33,3 +33,4 @@ gem 'jquery-rails'
 gem 'pry', '~> 0.12.2'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-colorpicker-rails'
+gem "responders"

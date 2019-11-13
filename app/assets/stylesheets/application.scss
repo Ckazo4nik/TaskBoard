@@ -19,110 +19,117 @@
 body {
   background: #e7e8e9;
 }
-span.dropdown_menu {
-  float: right;
-}
-#title {
-  //width: 100%;
-}
-#name {
-  width: 50%;
-}
-#add_project {
-  cursor: pointer;
-  margin-top: 15px;
-  color: red;
-}
-#add_task {
-  cursor: pointer;
-  margin-top: 15px;
-  color: red;
-}
-.project-list, .task-list {
-  width: 100%;
-}
-.project-list {
-  margin-top: 20px;
-}
 
-.project:hover {
-  #dropdown-toggle:after {
-    content: '\2807';
-    font-size: 14px;
-    cursor: pointer;
+.root_page {
+
+  span.dropdown_menu {
+    float: right;
   }
-}
-.active {
-  background: #828384;
-}
-.title_projects {
-  margin: 20px 0;
-}
-.task {
-  border-bottom: 1px #c3c3c3 solid;
-  padding-bottom: 1em;
-  padding-top: 1em;
-}
-.task:hover {
-  #dropdown-toggle:after {
-    content: '\2807';
-    font-size: 14px;
-    cursor: pointer;
+  #title {
+    //width: 100%;
   }
-}
-.square {
-  height: 15px;
-  width: 15px;
-  position: relative;
-  top: 5px;
-  border: 1px black solid;
-}
-#task_body {
-  background: white;
-  height: 90vh;
-}
-#tasks {
-  padding: 20px;
-}
-.head {
-  margin-bottom: 20px;
-  span{
-    font-size: 25px;
-    &.date {
-      color: grey;
+  #name {
+    width: 50%;
+  }
+  #add_project {
+    cursor: pointer;
+    margin-top: 15px;
+    color: red;
+  }
+  #add_task {
+    cursor: pointer;
+    margin-top: 15px;
+    color: red;
+  }
+  .project-list, .task-list {
+    width: 100%;
+  }
+  .project-list {
+    margin-top: 20px;
+  }
+
+  .project:hover {
+    #dropdown-toggle:after {
+      content: '\2807';
       font-size: 14px;
-      line-height: 24px;
-      font-weight: 600;
-      margin-top: -5px;
+      cursor: pointer;
     }
   }
-}
-.project_color {
-  width: 15px;
-  height: 15px;
-  border-radius: 7px;
-  margin-left: 25px;
-  display: inline-block;
-  position: relative;
-  top: 1px;
-}
-.project_title {
-  font-size: 21px;
-  margin-left: 20px;
-}
-.filter_link {
-  a {
-    color: unset;
+  .active {
+    background: #828384;
+  }
+  .title_projects {
+    margin: 20px 0;
+  }
+  .task {
+    border-bottom: 1px #c3c3c3 solid;
+    padding-bottom: 1em;
+    padding-top: 1em;
+
+
+    &:hover {
+      #dropdown-toggle:after {
+        content: '\2807';
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+  }
+  .square {
+    height: 15px;
+    width: 15px;
+    position: relative;
+    top: 5px;
+    border: 1px black solid;
+  }
+  #task_body {
+    background: white;
+    height: 90vh;
+  }
+  #tasks {
+    padding: 20px;
+  }
+  .head {
+    margin-bottom: 20px;
+    span{
+      font-size: 25px;
+      &.date {
+        color: grey;
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 600;
+        margin-top: -5px;
+      }
+    }
+  }
+  .project_color {
+    width: 15px;
+    height: 15px;
+    border-radius: 7px;
+    margin-left: 25px;
+    display: inline-block;
+    position: relative;
+    top: 1px;
+  }
+  .project_title {
+    font-size: 21px;
+    margin-left: 20px;
+  }
+  .filter_link {
+    a {
+      color: unset;
+      text-decoration: none;
+      &:hover {
+        text-decoration: unset;
+      }
+    }
+  }
+  a#archive_link {
+    color: white;
     text-decoration: none;
     &:hover {
       text-decoration: unset;
     }
   }
-}
-a#archive_link {
-  color: white;
-  text-decoration: none;
-  &:hover {
-    text-decoration: unset;
-  }
+
 }

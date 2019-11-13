@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'projects#index'
 
@@ -5,11 +7,9 @@ Rails.application.routes.draw do
   resources :tasks do
     member do
       post :done
-
     end
     collection do
       get 'archive'
     end
   end
-
 end

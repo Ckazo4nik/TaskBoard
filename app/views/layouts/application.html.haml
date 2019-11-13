@@ -15,4 +15,15 @@
           = link_to 'Archive', archive_tasks_path, id: 'archive_link'
 
     .container
+      .col-md-12
+      - if notice
+        .alert.alert-primary.alert-dismissible.fade.show{:role => "alert"}
+          %strong= notice
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+      - if alert
+        .alert.alert-warning.alert-dismissible.fade.show{:role => "alert"}
+          %strong= alert
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
       = yield

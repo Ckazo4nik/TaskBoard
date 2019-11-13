@@ -8,7 +8,7 @@
         %span{class: 'dropdown-item', id: "edit_project_#{project.id}"} Edit
         %span{ class: 'dropdown-item', id: "destroy_project_#{project.id}"} Delete
   .col-md-12.project.d-none{id: "form_project_#{project.id}"}
-    = form_for project, url: projects_path, method: :patch, id: 'update_project_23' do
+    = form_for project, url: "/projects/#{project.id}", method: :patch, id: 'update_project_23' do
       .input-group
         = text_field_tag :title, project.title, class: 'form-control'
         = hidden_field_tag :id, project.id, class: 'form-control'

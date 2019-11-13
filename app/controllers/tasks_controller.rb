@@ -1,19 +1,26 @@
+# frozen_string_literal: true
+
 class TasksController < ApplicationController
+  before_action :load_projects, only: %i[create archive]
+  before_action :find_task, only: %i[destroy done update]
+
+  respond_to :json, only: :done
+  respond_to :html, only: %i[create update archive]
+
   def create
-    @task = Task.create(task_params)
+    @task  = Task.create(task_params)
     @tasks = filter_tasks
-    @projects = Project.all
     if @task.save
       respond_to do |format|
         format.json do
-          render json:  {
-              attachmentPartial:
-                  render_to_string(
-                      partial: 'projects/task',
-                      formats: :html,
-                      layout: false,
-                      collections: [@tasks, @projects]
-                  )
+          render json: {
+            attachmentPartial:
+                               render_to_string(
+                                 partial:     'projects/task',
+                                 formats:     :html,
+                                 layout:      false,
+                                 collections: [@tasks, @projects]
+                               )
           }
         end
       end
@@ -21,32 +28,41 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
     @task.update!(task_params)
-    redirect_to root_path
+    respond_with @task, location: -> { root_path }
   end
 
   def destroy
-    @task = Task.find(params[:id])
-    @task.destroy!
-    render json: { status: :ok }
+    respond_with @task.destroy!
   end
 
   def done
-    @task = Task.find(params[:id])
     @task.done!
-    render json: { status: :ok }
+    respond_with @task
   end
 
   def archive
     @tasks = Task.done.order('created_at ASC')
-    @projects = Project.all
+    respond_with @tasks
   end
-
 
   private
 
   def task_params
     params.permit(:name, :status, :priority, :project_id, :to_do_until)
+  end
+
+  def load_projects
+    @projects = Project.all
+  end
+
+  def find_task
+    @task = Task.find(params[:id])
+  end
+
+  def filter_tasks
+    Task.fresh
+      .filter_by_project(params[:project_id])
+      .filter_by_date_range(params[:date_range])
   end
 end
