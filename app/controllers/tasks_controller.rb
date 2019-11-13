@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   def create
     @task = Task.create(task_params)
-    @tasks = Task.fresh.includes(:project).order('priority DESC')
-    @projects = @tasks.map(&:project)
+    @tasks = filter_tasks
+    @projects = Project.all
     if @task.save
       respond_to do |format|
         format.json do
@@ -38,10 +38,13 @@ class TasksController < ApplicationController
     render json: { status: :ok }
   end
 
+  def archive
+    @tasks = Task.done.order('created_at ASC')
+    @projects = Project.all
+  end
+
 
   private
-
-
 
   def task_params
     params.permit(:name, :status, :priority, :project_id, :to_do_until)

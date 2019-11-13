@@ -1,0 +1,19 @@
+.row#projects
+  .project-list
+    .col-md-12.project{class: "#{Date.today.to_s == params[:date_range] ? 'active' : ''}"}
+      %span.project_title.filter_link= link_to 'Today', root_path(date_range: Date.today)
+    .col-md-12.project{class: "#{(Date.today + 7.days).to_s == params[:date_range] ? 'active' : ''}"}
+      %span.project_title.filter_link= link_to 'Next 7 days', root_path(date_range: Date.today + 7.days)
+    .text-center.title_projects
+      %b Projects
+    = render 'projects/project', collection: @projects
+  .col-md-12.text-center
+    #add_project + Add Project
+  .form_create_project.d-none
+    = form_with model: Project.new, id: 'new_project' do
+      .input-group
+        = text_field_tag :color, '', class: 'form-control', id: 'colorpicker'
+        = text_field_tag :title, '', class: 'form-control'
+      .buttons.col-md-12.text-center
+        = submit_tag 'Save', class: 'col-md-6'
+        = link_to 'Cancel', '', class: 'col-md-6'

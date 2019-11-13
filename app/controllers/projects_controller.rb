@@ -1,10 +1,7 @@
 class ProjectsController < ApplicationController
-
   def index
     @projects = Project.all.order('created_at ASC')
-    @project = Project.new
-    @tasks = Task.fresh.order('priority DESC')
-    # @tasks = Task.where(project_id: params[:project_id] || @projects.first.id) if params[:project_id]
+    @tasks = filter_tasks
   end
 
   def create
@@ -45,6 +42,10 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.permit(:title)
+    params.permit(:title, :color)
+  end
+
+  def find_project
+    @project = Project.find_by_title(params[:title]) if params[:title]
   end
 end

@@ -1,20 +1,10 @@
 .row
-  .col-md-2
-    .row#projects
-      .project-list
-        = render 'project', collection: @projects
-      .col-md-12
-        #add_project Add Project
-    .form_create_project.d-none
-      = form_with model: @project, id: 'new_project' do
-        = text_field_tag :title
-        .buttons.col-md-12.text-center
-          = submit_tag 'Save', class: 'col-md-6'
-          = link_to 'Cancel', '', class: 'col-md-6'
-  .col-md-10#task_body
+  .col-md-3
+    = render 'shareds/sidebar', collection: @projects
+  .col-md-9#task_body
     .row#tasks
       .head
-        %span= "Сьогодні"
+        %span= "Today"
         %span.date= Date.today.strftime('%a, %e %b %Y')
       .task-list
         - if @tasks&.any?
@@ -23,13 +13,13 @@
           .col-md-12
             Ще не створено жодного таску
       .col-md-12
-        #add_task Add Task
+        #add_task + Add Task
     .form_create_task.d-none
       = form_with model: Task.new, id: 'new_task' do
         .input-group
           = text_field_tag :name, '', class: 'form-control'
           = text_field_tag :to_do_until, '', placeholder: 'date', class: 'datepicker form-control '
-          = select_tag :project_id, options_from_collection_for_select(@projects, :id, :title), class: 'Zzform-control'
+          = select_tag :project_id, options_from_collection_for_select(@projects, :id, :title), class: 'form-control'
           = select_tag :priority, options_for_select(Task.priorities.collect{ |t| [t.first, t.first] }), class: 'form-control'
         .buttons.col-md-12.text-center
           = submit_tag 'Save', class: 'col-md-6'

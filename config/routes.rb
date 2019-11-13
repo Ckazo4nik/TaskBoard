@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       post :done
 
     end
+    collection do
+      get 'archive'
+    end
   end
 
 end

@@ -11,6 +11,8 @@
     %nav.navbar.navbar-dark.bg-primary
       .container
         = link_to "TODO", root_path, class: 'navbar-brand'
+        .text-right
+          = link_to 'Archive', archive_tasks_path, id: 'archive_link'
 
     .container
       = yield

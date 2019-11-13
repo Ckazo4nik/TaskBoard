@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require bootstrap-datepicker
+ *= require bootstrap-colorpicker
  *= require_self
  */
 @import "bootstrap";
@@ -22,16 +23,20 @@ span.dropdown_menu {
   float: right;
 }
 #title {
-  width: 100%;
+  //width: 100%;
 }
 #name {
   width: 50%;
 }
 #add_project {
   cursor: pointer;
+  margin-top: 15px;
+  color: red;
 }
 #add_task {
   cursor: pointer;
+  margin-top: 15px;
+  color: red;
 }
 .project-list, .task-list {
   width: 100%;
@@ -46,6 +51,12 @@ span.dropdown_menu {
     font-size: 14px;
     cursor: pointer;
   }
+}
+.active {
+  background: #828384;
+}
+.title_projects {
+  margin: 20px 0;
 }
 .task {
   border-bottom: 1px #c3c3c3 solid;
@@ -84,5 +95,34 @@ span.dropdown_menu {
       font-weight: 600;
       margin-top: -5px;
     }
+  }
+}
+.project_color {
+  width: 15px;
+  height: 15px;
+  border-radius: 7px;
+  margin-left: 25px;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+}
+.project_title {
+  font-size: 21px;
+  margin-left: 20px;
+}
+.filter_link {
+  a {
+    color: unset;
+    text-decoration: none;
+    &:hover {
+      text-decoration: unset;
+    }
+  }
+}
+a#archive_link {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    text-decoration: unset;
   }
 }

@@ -5,6 +5,9 @@ class Task < ApplicationRecord
   enum status: %i[fresh done]
   enum priority: %i[low middle high]
 
+  scope :filter_by_project, ->(project_id) { where(project_id: project_id) if project_id }
+  scope :filter_by_date_range, ->(date_range) { where('to_do_until <= ?', date_range || Date.tomorrow) }
+
   def check_to_do_until_date
     if to_do_until.nil?
       errors[:to_do_until] << 'TODO date nil!'

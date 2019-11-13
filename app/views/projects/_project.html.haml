@@ -1,6 +1,7 @@
 - @projects.each do |project|
-  .col-md-12.project{id: "project_#{project.id}"}
-    %span= project.title
+  .col-md-12.project{id: "project_#{project.id}", class: "#{project.id.to_s == params[:project_id] ? 'active' : ''}"}
+    %span.project_color{style: "background:#{project.color}"}
+    %span.project_title.filter_link= link_to project.title, root_path(project_id: project.id), turbolinks: false
     %span.dropdown_menu.dropleft
       #dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
       .dropdown-menu
@@ -8,8 +9,9 @@
         %span{ class: 'dropdown-item', id: "destroy_project_#{project.id}"} Delete
   .col-md-12.project.d-none{id: "form_project_#{project.id}"}
     = form_for project, url: projects_path, method: :patch, id: 'update_project_23' do
-      = text_field_tag :title, project.title
-      = hidden_field_tag :id, project.id
+      .input-group
+        = text_field_tag :title, project.title, class: 'form-control'
+        = hidden_field_tag :id, project.id, class: 'form-control'
       .buttons.col-md-12.text-center
         = submit_tag 'Save', class: 'col-md-6', id: 'update_p'
         = link_to 'Cancel', '', class: 'col-md-6'

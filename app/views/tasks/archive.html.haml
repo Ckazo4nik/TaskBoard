@@ -1,0 +1,14 @@
+.row
+  .col-md-3
+    = render 'shareds/sidebar', collection: @projects
+  .col-md-9#task_body
+    .row#tasks
+      .head
+        %span= "Done"
+        %span.date= Date.today.strftime('%a, %e %b %Y')
+      .task-list
+        - if @tasks&.any?
+          = render 'projects/task', collections: [@tasks, @projects]
+        - else
+          .col-md-12
+            Ще не виконано жодного таску

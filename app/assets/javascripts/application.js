@@ -17,8 +17,8 @@
 //= require popper
 //= require bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap-colorpicker
 //= require_tree .
-
 
 $(document).ready(function() {
   $("#new_project").on("ajax:success", function(event) {
@@ -43,7 +43,6 @@ $(document).on('click', '#add_project',function() {
     $(this).addClass('d-none');
     $('.form_create_project').removeClass('d-none')
 });
-
 
 $(document).on('click', '#add_task',function() {
     $(this).addClass('d-none');
@@ -113,4 +112,5 @@ $(document).ready(function(){
   $('.datepicker').datepicker({
     format: "yyyy-mm-dd"
   });
+  $('#colorpicker').colorpicker()
 });

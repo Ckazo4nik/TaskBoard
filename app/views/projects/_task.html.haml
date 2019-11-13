@@ -9,6 +9,7 @@
         = task.to_do_until.strftime('%a, %e %b %Y')
       .col-md-3.text-center
         = task.project&.title
+        %span.project_color{style: "background:#{task.project.color}"}
       .col-md-1.text-right
         %span.dropdown_menu.dropleft
           #dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
@@ -20,7 +21,7 @@
     = form_for task, url: "/tasks/#{task.id}", method: :patch, id: 'new_task', remote: true do
       .input-group
         = text_field_tag :name, task.name, class: 'form-control'
-        = text_field_tag :to_do_until, task.to_do_until, placeholder: 'date', class: 'datepicker form-control '
+        = text_field_tag :to_do_until, task.to_do_until, placeholder: 'date', class: 'datepicker form-control'
         = select_tag :project_id, options_from_collection_for_select(@projects, :id, :title), class: 'form-control'
         = select_tag :priority, options_for_select(Task.priorities.collect{ |t| [t.first, t.first] }), class: 'form-control'
       .buttons.col-md-12.text-center
